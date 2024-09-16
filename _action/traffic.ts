@@ -46,6 +46,13 @@ let { data: nine, error } = await supabase
   return {data: nine, error}
 }
 
+export async function getAllRecomendationNine() {
+    let { data: rekomendasi, error } = await supabase
+    .from('rekomendasi')
+    .select('*')   
+  return {data: rekomendasi, error}
+}
+
 
 export async function getLocationNameAndLonglit() {
   // Fungsi untuk menghapus duplikat
