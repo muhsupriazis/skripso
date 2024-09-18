@@ -28,19 +28,13 @@ export default function TrafficPage() {
   }, [])
 
   if(loading) {
-    return <div>Loading...</div>
+    return <div className="text-center py-3">Loading...</div>
   }
 
   return (
     <>
       <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
         <div className="flex items-center justify-between space-y-2">
-          <div>
-            <h2 className="text-2xl font-bold tracking-tight">Database kepadatan lalu lintas</h2>
-          </div>
-          {/* <div className="flex items-center space-x-2">
-            <UserNav />
-          </div> */}
         </div>
         {/* {JSON.stringify(traffics)} */}
         <DataTable data={traffics} columns={columns} />

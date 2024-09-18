@@ -23,13 +23,13 @@ export function NavAdmin() {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem>
+        {/* <NavigationMenuItem>
           <Link href="/dashboard/week" legacyBehavior passHref>
             <NavigationMenuLink className={buttonVariants({variant: 'link'})}>
               Mingguan
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
         <NavigationMenuItem>
           <Link href="/dashboard/day" legacyBehavior passHref>
             <NavigationMenuLink className={buttonVariants({variant: 'link'})}>
@@ -45,6 +45,13 @@ export function NavAdmin() {
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
+          <Link href="/dashboard/recomendation" legacyBehavior passHref>
+            <NavigationMenuLink className={buttonVariants({variant: 'link'})}>
+              Rekomendasi
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        {/* <NavigationMenuItem>
           <Link href="/dashboard/tree" legacyBehavior passHref>
             <NavigationMenuLink className={buttonVariants({variant: 'link'})}>
               3 Periode
@@ -57,7 +64,7 @@ export function NavAdmin() {
               9 Periode
             </NavigationMenuLink>
           </Link>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
         <NavigationMenuItem>
           <Link target="_blank" href="https://skripsi-lake.vercel.app/" legacyBehavior passHref>
             <NavigationMenuLink className={buttonVariants({variant: 'link'})}>

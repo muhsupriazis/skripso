@@ -12,22 +12,44 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-// import { toast } from "@/hooks/use-toast"
+import { toast } from "@/hooks/use-toast"
 // import { supabase } from "@/lib/db"
 //import { cookies } from "next/headers"
 import Link from "next/link"
-// import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function Register() {
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
-  //const router = useRouter();
+  const router = useRouter();
   const [checked, setChecked] = useState(false);
 
   const handlerSubmit = async () => {
-
-    console.log(username, password)
+    if(username == '' || password == '') {
+      toast({
+        title: 'Error',
+        description: 'Username dan password tidak boleh kosong',
+      })
+      return;
+    }
+    if(password !== 'admin') {
+      toast({
+        title: 'Error',
+        description: 'Password salah',
+      })
+      return;
+    }
+    if(username !== 'admin') {
+      toast({
+        title: 'Error',
+        description: 'Username salah',
+      })
+      return;
+    }
+    document.cookie = 'token=admin'
+    router.push('/dashboard/db')
+    return
   }
   return (
     <div className="flex justify-center items-center min-h-screen">
@@ -58,7 +80,7 @@ export default function Register() {
         <CardFooter className="flex flex-col space-y-3">
           <Button onClick={handlerSubmit} className="w-full">Masuk</Button>
           {/* <CardDescription>Belum punya akun? <Link className={buttonVariants({variant: 'link'})} href={'/register'}>Register</Link></CardDescription> */}
-          <Link className={buttonVariants({variant: 'link'})} href={'/reset-password'}>Lupa password?</Link>
+          {/* <Link className={buttonVariants({variant: 'link'})} href={'/reset-password'}>Lupa password?</Link> */}
         </CardFooter>
       </Card>
     </div>

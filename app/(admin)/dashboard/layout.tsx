@@ -3,6 +3,7 @@ import { NavAdmin } from "../components/navbar-admin";
 import { ModeToggle } from "@/components/theme-toggle";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import { ButtonExit } from "../components/exit-button";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +23,8 @@ export default function AdminLayout({
         </div>
         <div className="flex space-x-4 justify-center items-center">
           {/* <ModeToggle /> */}
-          <Link className={buttonVariants({variant: 'secondary'})} href={'/login'}>Keluar</Link>
+          <ButtonExit />
+          {/* <Link className={buttonVariants({variant: 'secondary'})} href={'/login'}>Keluar</Link> */}
         </div>
       </header>
       {children}
