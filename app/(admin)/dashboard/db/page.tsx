@@ -7,6 +7,8 @@ import { DataTable } from "./components/data-table"
 import { trafficSchema } from "./data/schema"
 import { getAllTraffic } from "@/_action/traffic"
 import { useEffect, useState } from "react"
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
 
 export default function TrafficPage() {
   const [traffics, setTraffics] = useState([])
@@ -35,6 +37,7 @@ export default function TrafficPage() {
     <>
       <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
         <div className="flex items-center justify-between space-y-2">
+          <Link href={'/dashboard/add'} className={buttonVariants({variant: 'secondary'})}>Tambah Data</Link>
         </div>
         {/* {JSON.stringify(traffics)} */}
         <DataTable data={traffics} columns={columns} />

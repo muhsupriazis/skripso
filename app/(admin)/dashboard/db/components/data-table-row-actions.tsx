@@ -12,8 +12,12 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { toast } from "@/hooks/use-toast"
+
 
 import { trafficSchema } from "../data/schema"
+import { supabase } from "@/lib/db"
+import { useRouter } from "next/navigation"
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>
@@ -22,6 +26,43 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
+  const router = useRouter();
+  const traffic = trafficSchema.parse(row.original)
+  const handlerDelete = async () => {
+    const isDelete = confirm('Apakah anda yakin ingin menghapus data ini?')
+    if(!isDelete) {
+      toast({
+        title: 'Batal',
+        description: 'Batal  menghapus',
+      })
+      return
+    }
+    const { error } = await supabase
+    .from('traffics')
+    .delete()
+    .eq('id', traffic.id) 
+    if(error) {
+      toast({
+        title: 'Error',
+        description: 'Gagal  menghapus',
+      })
+      return;
+    }
+    toast({
+      title: 'Success',
+      description: 'Berhasil menghapus',
+    })
+  }
+
+  const handlerEdit = () => {
+    router.push(`/dashboard/edit/${traffic.id}`)
+  }
+
+  return (
+    <Button onClick={handlerDelete}>
+      Delete
+    </Button>
+  )
 
   return (
     <DropdownMenu>
@@ -35,26 +76,9 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        {/* <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.label}>
-              {labels.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub> */}
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={handlerEdit}>Edit</DropdownMenuItem>
+        <DropdownMenuItem onClick={handlerDelete}>
           Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
