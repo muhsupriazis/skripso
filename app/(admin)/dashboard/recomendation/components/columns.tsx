@@ -33,7 +33,7 @@ export const columns: ColumnDef<RecomendatioNine>[] = [
       return (
         <div className="flex space-x-2">
           <span className="max-w-[500px] truncate font-medium">
-            {label?.location_name}
+            {label?.location_name.split('Pt.')[0]}
           </span>
         </div>
       )
